@@ -1,0 +1,19 @@
+compatibilityVersion: naiscript-1.0
+# Generate a fresh UUID for your script: run `uuidgen` or visit https://www.uuidgenerator.net
+id: 23c94605-a1d2-4fec-9a83-81c6d7b5edb4
+name: My Script
+version: 0.1.0
+author: your-username
+description: "My Script - A brief description of what it does"
+# Optional: limit script memory usage (in MB)
+# memoryLimit: 8
+
+# Configurable settings shown in the script's gear menu.
+# Access values in code via: await api.v1.config.get('key_name')
+config: []
+#  - name: my_setting
+#    prettyName: My Setting
+#    description: Description shown to the user
+#    type: string        # string | boolean | number
+#    multiline: false
+#    default: "default value"

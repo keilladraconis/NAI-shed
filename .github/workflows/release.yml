@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "project.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Get version from project.yaml
+        id: get_version
+        run: echo "VERSION=$(grep "^version:" project.yaml | awk '{print $2}')" >> $GITHUB_ENV
+
+      - name: Check if tag exists
+        id: check_tag
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/v${{ env.VERSION }}"; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        if: steps.check_tag.outputs.exists == 'false'
+        run: npm install
+
+      - name: Build
+        if: steps.check_tag.outputs.exists == 'false'
+        run: npm run build
+
+      - name: Create Release
+        if: steps.check_tag.outputs.exists == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          SCRIPT_FILE=$(find dist -maxdepth 1 -name "*.naiscript" | head -1)
+          SCRIPT_NAME=$(basename "$SCRIPT_FILE" .naiscript)
+          VERSIONED_FILE="dist/${SCRIPT_NAME}-v${{ env.VERSION }}.naiscript"
+          mv "$SCRIPT_FILE" "$VERSIONED_FILE"
+          gh release create "v${{ env.VERSION }}" \
+            "$VERSIONED_FILE" \
+            --title "Release v${{ env.VERSION }}" \
+            --generate-notes
