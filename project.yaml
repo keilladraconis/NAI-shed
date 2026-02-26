@@ -3,25 +3,54 @@ id: 23c94605-a1d2-4fec-9a83-81c6d7b5edb4
 name: Shed
 version: 0.1.0
 author: keilladraconis
-description: "Shed — Keep your lorebook entries in sync with your story. Characters grow; their lore should too."
+description: "Shed — Keep your lorebook entries in sync with your story.
+  Characters grow; their lore should too."
 
 config:
   - name: system_prompt
     prettyName: System Prompt
-    description: "Instructions sent to the AI when rewriting lorebook entries. Customize to change Shed's rewriting style."
+    description: "Instructions sent to the AI when rewriting lorebook entries.
+      Customize to change Shed's rewriting style."
     type: string
     multiline: true
-    default: "You are Shed, a lorebook continuity editor for an interactive story. Your job is\nto rewrite a character's lorebook entry so it reflects their current state based\non recent story events.\n\nRules:\n- Output ONLY the updated lorebook entry text. No preamble, no commentary.\n- Maintain the same approximate format, length, and style as the current entry.\n- Incorporate changes that have happened or clearly begun in the story.\n- Preserve details that haven't changed.\n- Be guided by the Shed Pattern (the author's stated intent for transformation).\n- Don't leap ahead — only reflect changes actually evidenced in the story.\n- Write in third person, present tense, descriptive prose."
+    default: "You are Shed, a lorebook continuity editor for an interactive story.
+      Your job is
+
+      to rewrite a character's lorebook entry so it reflects their current state
+      based
+
+      on recent story events.
+
+
+      Rules:
+
+      - Output ONLY the updated lorebook entry text. No preamble, no commentary.
+
+      - Maintain the same approximate format, length, and style as the current
+      entry.
+
+      - Incorporate changes that have happened or clearly begun in the story.
+
+      - Preserve details that haven't changed.
+
+      - Be guided by the Shed Pattern (the author's stated intent for
+      transformation).
+
+      - Don't leap ahead — only reflect changes actually evidenced in the story.
+
+      - Write in third person, present tense, descriptive prose."
 
   - name: temperature
     prettyName: Temperature
-    description: "Generation temperature (0.0–1.5). Lower = more conservative, higher = more creative."
+    description: "Generation temperature (0.0–1.5). Lower = more conservative,
+      higher = more creative."
     type: number
     default: 0.35
 
   - name: max_tokens
     prettyName: Max Tokens
-    description: "Maximum output tokens per molt. Controls how long the rewritten entry can be."
+    description: "Maximum output tokens per molt. Controls how long the rewritten
+      entry can be."
     type: number
     default: 500
 
@@ -36,3 +65,4 @@ config:
     description: "Model ID to use for generating molts (e.g. glm-4-6)."
     type: string
     default: "glm-4-6"
+updatedAt: 1772146587
