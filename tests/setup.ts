@@ -37,6 +37,11 @@ const apiMock = {
       set: vi.fn().mockResolvedValue(undefined),
       setIfAbsent: vi.fn().mockResolvedValue(undefined),
     },
+    historyStorage: {
+      get: vi.fn().mockResolvedValue(null),
+      set: vi.fn().mockResolvedValue(undefined),
+      remove: vi.fn().mockResolvedValue(undefined),
+    },
     tempStorage: {
       get: vi.fn().mockResolvedValue(null),
       set: vi.fn().mockResolvedValue(undefined),
@@ -53,7 +58,8 @@ const apiMock = {
     },
     ui: {
       register: vi.fn().mockResolvedValue(undefined),
-      updateParts: vi.fn().mockResolvedValue(undefined),
+      update: vi.fn().mockResolvedValue(undefined),
+      toast: vi.fn(),
     },
     memory: {
       get: vi.fn().mockResolvedValue(''),
@@ -64,6 +70,7 @@ const apiMock = {
       set: vi.fn().mockResolvedValue(undefined),
     },
     lorebook: {
+      entry: vi.fn().mockResolvedValue(null),
       entries: vi.fn().mockResolvedValue([]),
       createEntry: vi.fn().mockResolvedValue(undefined),
       updateEntry: vi.fn().mockResolvedValue(undefined),

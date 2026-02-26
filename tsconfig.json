@@ -15,7 +15,7 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noEmit": true,
-    "typeRoots": ["./external", "./node_modules/@types"],
+    "typeRoots": ["./external", "./node_modules/@types", "./node_modules"],
     "rewriteRelativeImportExtensions": true,
     "types": ["node", "vitest/globals"]
   },
