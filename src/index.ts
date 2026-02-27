@@ -1,4 +1,4 @@
-import { buildShedPanel, buildEmptyPanel, SHED_PANEL_ID } from './panel.js';
+import { buildShedPanel, buildEmptyPanel, buildGlobalPanel, SHED_PANEL_ID, SHED_GLOBAL_PANEL_ID } from './panel.js';
 import { storageKeys } from './constants.js';
 import { DEFAULT_CONFIG, type ShedConfig } from './types.js';
 
@@ -10,11 +10,19 @@ import { DEFAULT_CONFIG, type ShedConfig } from './types.js';
     return;
   }
 
-  api.v1.log('Shed v0.1.0 loaded.');
+  api.v1.log('Shed v0.1.2 loaded.');
 
-  // ─── Initial panel registration ────────────────────────────────────────────
-  // Shows the empty state. Content is replaced when an entry is selected.
+  // ─── Panel registration ────────────────────────────────────────────────────
+  // scriptPanel  — top-level entry in the Scripts section with icon + usage guide.
+  // lorebookPanel — per-entry Shedding controls; content replaced on entry select.
   await api.v1.ui.register([
+    {
+      type: 'scriptPanel',
+      id: SHED_GLOBAL_PANEL_ID,
+      name: 'Shed',
+      iconId: 'layers',
+      content: buildGlobalPanel(),
+    },
     {
       type: 'lorebookPanel',
       id: SHED_PANEL_ID,

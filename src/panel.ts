@@ -1,4 +1,4 @@
-import { SHED_PANEL_ID, storageKeys } from './constants.js';
+import { SHED_PANEL_ID, SHED_GLOBAL_PANEL_ID, storageKeys } from './constants.js';
 import { molt } from './molt.js';
 import type { ShedConfig } from './types.js';
 
@@ -15,8 +15,6 @@ export function buildShedPanel(
   sloughText: string | null,
 ): object[] {
   return [
-    { type: 'text', markdown: true, text: '### 🐍 Shed' },
-
     // ── Shedding toggle ──────────────────────────────────────────────────────
     // ON  → restore the last evolved skin (if any) to the lorebook.
     // OFF → restore the original slough to the lorebook.
@@ -137,4 +135,34 @@ export function buildEmptyPanel(): object[] {
   ];
 }
 
-export { SHED_PANEL_ID };
+/**
+ * Content for the top-level scriptPanel — appears in the Scripts section
+ * with the Shed icon and gives users a quick usage guide.
+ */
+export function buildGlobalPanel(): object[] {
+  return [
+    {
+      type: 'text',
+      markdown: true,
+      text: [
+        '## 🐍 Shed',
+        '',
+        '*Keep your lorebook entries in sync with your story.*',
+        '*Characters grow; their lore should too.*',
+        '',
+        '---',
+        '',
+        '**How to use:**',
+        '1. Open the Lorebook and select an entry',
+        '2. Open the **🐍 Shed** tab in that entry\'s panel',
+        '3. Write a **Shed Pattern** — describe how this entry should evolve',
+        '4. Click **🐍 Shed Now** to rewrite the entry using AI',
+        '5. Use **↩ Unshed** to fully revert to the original at any time',
+        '',
+        '*The original text is always preserved as the Slough and can be restored.*',
+      ].join('\n'),
+    },
+  ];
+}
+
+export { SHED_PANEL_ID, SHED_GLOBAL_PANEL_ID };

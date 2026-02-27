@@ -1,4 +1,5 @@
 export const SHED_PANEL_ID = 'shed-panel';
+export const SHED_GLOBAL_PANEL_ID = 'shed-global-panel';
 
 export const DEFAULT_SYSTEM_PROMPT = [
   "You are Shed, a lorebook continuity editor for an interactive story. Your job is",
